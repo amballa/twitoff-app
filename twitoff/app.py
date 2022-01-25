@@ -19,7 +19,6 @@ def create_app():
     def home_page():
         # query for all users in the database
         users = User.query.all()
-        print(users)
         return render_template('base.html', title='Home', users=users)
 
     @app.route('/populate')
@@ -33,19 +32,31 @@ def create_app():
         # they're ready to used (inserted into)
         DB.create_all()
 
-        # Make two new users
-        ryan = User(id=1, username='ryanallred')
-        julian = User(id=2, username='julian')
+        # Make two test users
+        elon = User(id=1, username='elonmusk')
+        joe = User(id=2, username='joerogan')
 
-        # Make two test tweets and attach the tweets to those users
-        tweet1 = Tweet(id=1, text="this is ryan's tweet", user=ryan)
-        tweet2 = Tweet(id=2, text="this is julian's tweet", user=julian)
+        # Make six test tweets and attaching the tweets to two users
+        tweet1 = Tweet(id=1, text="This is annoying", user=elon)
+        tweet2 = Tweet(
+            id=2, text="Twitter is spending engineering resources on this bs while crypto scammers are throwing a spambot block party in every thread!?""", user=elon)
+        tweet3 = Tweet(
+            id=3, text="Tesla AI might play a role in AGI, given that it trains against the outside world, especially with the advent of Optimus", user=elon)
+        tweet4 = Tweet(id=4, text="Believe in the future!", user=elon)
+        tweet5 = Tweet(
+            id=5, text="We need to talk about the vaccines - UnHerd", user=joe)
+        tweet6 = Tweet(
+            id=6, text="10 rounds in the books. Didn't want to do it. Did it anyway.", user=joe)
 
         # Inserting into the DB when working with SQLite directly
-        DB.session.add(ryan)
-        DB.session.add(julian)
+        DB.session.add(elon)
+        DB.session.add(joe)
         DB.session.add(tweet1)
         DB.session.add(tweet2)
+        DB.session.add(tweet3)
+        DB.session.add(tweet4)
+        DB.session.add(tweet5)
+        DB.session.add(tweet6)
 
         # Commit the DB changes
         DB.session.commit()
