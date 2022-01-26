@@ -20,8 +20,10 @@
     <article class="flex two" style="padding: 3em 1em;">
         {% block content %}
         {% for user in users %}
+        {% for tweet in user.tweets %}
         <p>{{ user.username }}</p>
-        <p>{{ user.tweets[0].text }}</p>
+        <p>{{ tweet.text }}</p>
+        {% endfor %}
         {% endfor %}
         {% endblock %}
     </article>
